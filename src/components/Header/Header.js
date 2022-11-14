@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import styles from './Header.module.scss';
 import HeaderMenu from './components/HeaderMenu';
 import { NavLink } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { wishlistDisplayState } from '../../state';
 
 function Header() {
   const [showMenu, setShowMenu] = useState(false);
+  const setWishlistDisplay = useSetRecoilState(wishlistDisplayState);
 
   return (
     <header className={`${styles.header} d-flex flex-row align-items-center`}>
@@ -20,7 +23,10 @@ function Header() {
         <NavLink to="/admin">
           <button className="btn btn-primary mr-15">Admin</button>
         </NavLink>
-        <button className="mr-15 btn btn-reverse-primary">
+        <button
+          onClick={() => setWishlistDisplay(true)}
+          className="mr-15 btn btn-reverse-primary"
+        >
           <i className="fa-solid fa-heart mr-5"></i>
           <span>Wishlist</span>
         </button>
